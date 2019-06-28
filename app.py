@@ -1,8 +1,9 @@
 from flask import Flask, render_template, redirect, jsonify
 from flask_pymongo import PyMongo
 import numpy
+import pandas as pd
 import scrape_energy
-import json
+
 
 # Create flask routes
 app = Flask(__name__)
@@ -33,8 +34,23 @@ def data():
     energy_data = mongo.db.energy.find_one()
 
     energy_data.pop('_id')
- 
-    return jsonify(energy_data)
+    
+    top_df = pd.DataFrame(energy_data)
+    
+    big_spenders = []    
+    for i in range(len(top_df)):
+        if top_df.population[i] != 0 and top_df.gdppc[i] != 0:
+            calculation = (top_df.econsumption[i] / top_df.population[i]) / top_df.gdppc[i]
+            big_spenders.append(calculation)
+        elif top_df.population[i] == 0 or top_df.gdppc[i] == 0:
+            big_spenders.append(0)
+
+    top_df["big_spenders"] = big_spenders
+
+    top_df.sort_values(by=["big_spenders"], ascending=False, inplace=True)
+    top_population = top_df.to_dict("list")
+
+    return jsonify(top_population)
 
 if __name__ == "__main__":
     app.run()
