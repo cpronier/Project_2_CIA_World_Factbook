@@ -20,7 +20,7 @@ def index():
 
 
 @app.route("/scrape")
-def dataframe():
+def scrape():
     energy = mongo.db.energy
 
     energy_data = scrape_energy.scrape()
@@ -29,28 +29,88 @@ def dataframe():
     
     return redirect("/", code=302)
 
-@app.route("/data")
-def data():
+@app.route("/data1")
+def data1():
     energy_data = mongo.db.energy.find_one()
 
     energy_data.pop('_id')
     
-    top_df = pd.DataFrame(energy_data)
+    top_consumers1_df = pd.DataFrame(energy_data)
     
-    big_spenders = []    
-    for i in range(len(top_df)):
-        if top_df.population[i] != 0 and top_df.gdppc[i] != 0:
-            calculation = (top_df.econsumption[i] / top_df.population[i]) / top_df.gdppc[i]
-            big_spenders.append(calculation)
-        elif top_df.population[i] == 0 or top_df.gdppc[i] == 0:
-            big_spenders.append(0)
+    top_consumers1_df.sort_values(by=["econsumptionpc"], ascending=False, inplace=True)
+    
+    top_consumers1 = top_consumers1_df.to_dict("list")
 
-    top_df["big_spenders"] = big_spenders
+    return jsonify(top_consumers1)
 
-    top_df.sort_values(by=["big_spenders"], ascending=False, inplace=True)
-    top_population = top_df.to_dict("list")
+@app.route("/data1_without_IS_MH")
+def data1_without_IS_MH():
+    energy_data = mongo.db.energy.find_one()
 
-    return jsonify(top_population)
+    energy_data.pop('_id')
+    
+    top_consumers2_df = pd.DataFrame(energy_data)
+    
+    top_consumers2_df.sort_values(by=["econsumptionpc"], ascending=False, inplace=True)
+    top_consumers2_df = top_consumers2_df[top_consumers2_df.name != 'Marshall Islands']
+    top_consumers2_df = top_consumers2_df[top_consumers2_df.name != 'Iceland']
+    
+    top_consumers2 = top_consumers2_df.to_dict("list")
+
+    return jsonify(top_consumers2)
+
+@app.route("/econsumption")
+def econsumption():
+
+    return render_template("econsumption.html")
+
+@app.route("/econsumption_wo")
+def econsumption_wo():
+
+    return render_template("econsumption_wo.html")
+
+
+@app.route("/data2")
+def data2():
+    energy_data = mongo.db.energy.find_one()
+
+    energy_data.pop('_id')
+    
+    top_spenders1_df = pd.DataFrame(energy_data)
+    
+    top_spenders1_df.sort_values(by=["little_big_spenders"], ascending=False, inplace=True)
+    
+    top_spenders1 = top_spenders1_df.to_dict("list")
+
+    return jsonify(top_spenders1)
+
+@app.route("/data2_without_IS_MH")
+def data2_without_IS_MH():
+    energy_data = mongo.db.energy.find_one()
+
+    energy_data.pop('_id')
+    
+    top_spender2_df = pd.DataFrame(energy_data)
+    
+    top_spender2_df.sort_values(by=["little_big_spenders"], ascending=False, inplace=True)
+    top_spender2_df = top_spender2_df[top_spender2_df.name != 'Marshall Islands']
+    top_spender2_df = top_spender2_df[top_spender2_df.name != 'Iceland']
+    
+    top_spender2 = top_spender2_df.to_dict("list")
+
+    return jsonify(top_spender2)
+
+
+@app.route("/little_big_spenders")
+def little_big_spenders():
+
+    return render_template("little_big_spenders.html")
+
+@app.route("/little_big_spenders_wo")
+def little_big_spenders_wo():
+
+    return render_template("little_big_spenders_wo.html")
+
 
 if __name__ == "__main__":
     app.run()

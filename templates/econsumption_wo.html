@@ -29,18 +29,43 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-item nav-link" href="/">Home</a>
-        <a class="nav-item nav-link" href="/econsumption">Consumption</a>
-        <a class="nav-item nav-link" href="/little_big_spenders">Big Spenders</a>
+        <a class="nav-item nav-link" href="/econsumption">Energy Consumption</a>
+        <a class="nav-item nav-link" href="/little_big_spenders">Little Big Spenders</a>
       </div>
     </div>
   </nav>
   <div class="container">
     <div class="row">
-      <div class="col-md-12 text-center">
-        <h1>Global Energy</h1>
-        <img src="https://img.memecdn.com/electricity-rule-eveything_o_1189603.jpg" alt="Energy Image">
+      <div class="col-md-1">
+        <a class="btn btn-secondary" href="/econsumption" type="button" id="outlierButton">
+          With Outliers
+        </a>
+      </div>
+      <div class="col-md-10 text-center">
+        <h1>Energy Consumption</h1>
+        <p>Use the interactive charts below to explore the dataset</p>
+      </div>
+      <div class="col-md-1">
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div id="map"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div id="chart1"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div id="chart2"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="../static/js/econsumption_wo.js"></script>
 </body>
 
 </html>

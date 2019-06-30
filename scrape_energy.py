@@ -15,14 +15,13 @@ def scrape():
     
     browser.visit(url)
 
-    time.sleep(3)
+    time.sleep(2)
 
     html = browser.html
 
     soup = bs(html, "html.parser")
 
     country_name = []
-    country_abbr = []
     country_pop = []
     population_rank = []
 
@@ -31,10 +30,34 @@ def scrape():
 
     for i in trow:
         name = i.find("td", class_="region").find("a").text
-        country_name.append(name)
+        if name == "Congo, Democratic Republic of the":
+            name = "CD"
+        if name == "Congo, Republic of the":
+            name = "CG"
+        if name == "Cote d'Ivoire":
+            name = "CI"
+        if name == "South Sudan":
+            name = "SS"
+        if name == "Svalbard":
+            name = "Svalbard and Jan Mayen"
+        if name == "Burma":
+            name = "Myanmar"
+        if name == "Korea, South":
+            name = "South Korea"
+        if name == "Korea, North":
+            name = "North Korea"
+        if name == "Bahamas, The":
+            name = "Bahamas"
+        if name == "Czechia":
+            name = "CZ"
+        if name == "Kosovo":
+            name = "XK"
+        if name == "Eswatini":
+            name = "SZ"
+        if name == "Timor-Leste":
+            name = "TL"
         
-        abbr = i.get("id")
-        country_abbr.append(abbr)
+        country_name.append(name)
         
         population = i.findAll("td")[2].text
         population = "".join(population.split(","))
@@ -45,18 +68,15 @@ def scrape():
 
     population_df = pd.DataFrame({
         "name": country_name,
-        "abbr": country_abbr,
         "population": country_pop,
         "population_rank": population_rank
     })
-
 
     #Extract electricity consumption data
     url = 'https://www.cia.gov/library/publications/the-world-factbook/fields/253rank.html'
     browser.visit(url)
 
-    time.sleep(3)
-
+    time.sleep(2)
     html = browser.html
 
     soup = bs(html, "html.parser")
@@ -70,6 +90,32 @@ def scrape():
 
     for i in trow:
         name = i.find("td", class_="region").find("a").text
+        if name == "Congo, Democratic Republic of the":
+            name = "CD"
+        if name == "Congo, Republic of the":
+            name = "CG"
+        if name == "Cote d'Ivoire":
+            name = "CI"
+        if name == "South Sudan":
+            name = "SS"
+        if name == "Svalbard":
+            name = "Svalbard and Jan Mayen"
+        if name == "Burma":
+            name = "Myanmar"
+        if name == "Korea, South":
+            name = "South Korea"
+        if name == "Korea, North":
+            name = "North Korea"
+        if name == "Bahamas, The":
+            name = "Bahamas"
+        if name == "Czechia":
+            name = "CZ"
+        if name == "Kosovo":
+            name = "XK"
+        if name == "Eswatini":
+            name = "SZ"
+        if name == "Timor-Leste":
+            name = "TL"
         country_name.append(name)
         
         econsumption = i.findAll("td")[2].text
@@ -89,8 +135,7 @@ def scrape():
     url = 'https://www.cia.gov/library/publications/the-world-factbook/fields/257rank.html'
     browser.visit(url)
 
-    time.sleep(3)
-
+    time.sleep(2)
     html = browser.html
 
     soup = bs(html, "html.parser")
@@ -104,6 +149,32 @@ def scrape():
 
     for i in trow:
         name = i.find("td", class_="region").find("a").text
+        if name == "Congo, Democratic Republic of the":
+            name = "CD"
+        if name == "Congo, Republic of the":
+            name = "CG"
+        if name == "Cote d'Ivoire":
+            name = "CI"
+        if name == "South Sudan":
+            name = "SS"
+        if name == "Svalbard":
+            name = "Svalbard and Jan Mayen"
+        if name == "Burma":
+            name = "Myanmar"
+        if name == "Korea, South":
+            name = "South Korea"
+        if name == "Korea, North":
+            name = "North Korea"
+        if name == "Bahamas, The":
+            name = "Bahamas"
+        if name == "Czechia":
+            name = "CZ"
+        if name == "Kosovo":
+            name = "XK"
+        if name == "Eswatini":
+            name = "SZ"
+        if name == "Timor-Leste":
+            name = "TL"
         country_name.append(name)
         
         fossil = i.findAll("td")[2].text
@@ -123,8 +194,7 @@ def scrape():
     url = 'https://www.cia.gov/library/publications/the-world-factbook/fields/258rank.html'
     browser.visit(url)
 
-    time.sleep(3)
-
+    time.sleep(2)
     html = browser.html
 
     soup = bs(html, "html.parser")
@@ -138,6 +208,32 @@ def scrape():
 
     for i in trow:
         name = i.find("td", class_="region").find("a").text
+        if name == "Congo, Democratic Republic of the":
+            name = "CD"
+        if name == "Congo, Republic of the":
+            name = "CG"
+        if name == "Cote d'Ivoire":
+            name = "CI"
+        if name == "South Sudan":
+            name = "SS"
+        if name == "Svalbard":
+            name = "Svalbard and Jan Mayen"
+        if name == "Burma":
+            name = "Myanmar"
+        if name == "Korea, South":
+            name = "South Korea"
+        if name == "Korea, North":
+            name = "North Korea"
+        if name == "Bahamas, The":
+            name = "Bahamas"
+        if name == "Czechia":
+            name = "CZ"
+        if name == "Kosovo":
+            name = "XK"
+        if name == "Eswatini":
+            name = "SZ"
+        if name == "Timor-Leste":
+            name = "TL"
         country_name.append(name)
         
         nuclear = i.findAll("td")[2].text
@@ -157,8 +253,7 @@ def scrape():
     url = 'https://www.cia.gov/library/publications/the-world-factbook/fields/259rank.html'
     browser.visit(url)
 
-    time.sleep(3)
-
+    time.sleep(2)
     html = browser.html
 
     soup = bs(html, "html.parser")
@@ -172,6 +267,32 @@ def scrape():
 
     for i in trow:
         name = i.find("td", class_="region").find("a").text
+        if name == "Congo, Democratic Republic of the":
+            name = "CD"
+        if name == "Congo, Republic of the":
+            name = "CG"
+        if name == "Cote d'Ivoire":
+            name = "CI"
+        if name == "South Sudan":
+            name = "SS"
+        if name == "Svalbard":
+            name = "Svalbard and Jan Mayen"
+        if name == "Burma":
+            name = "Myanmar"
+        if name == "Korea, South":
+            name = "South Korea"
+        if name == "Korea, North":
+            name = "North Korea"
+        if name == "Bahamas, The":
+            name = "Bahamas"
+        if name == "Czechia":
+            name = "CZ"
+        if name == "Kosovo":
+            name = "XK"
+        if name == "Eswatini":
+            name = "SZ"
+        if name == "Timor-Leste":
+            name = "TL"
         country_name.append(name)
         
         hydro = i.findAll("td")[2].text
@@ -191,8 +312,7 @@ def scrape():
     url = 'https://www.cia.gov/library/publications/the-world-factbook/fields/260rank.html'
     browser.visit(url)
 
-    time.sleep(3)
-
+    time.sleep(2)
     html = browser.html
 
     soup = bs(html, "html.parser")
@@ -206,6 +326,32 @@ def scrape():
 
     for i in trow:
         name = i.find("td", class_="region").find("a").text
+        if name == "Congo, Democratic Republic of the":
+            name = "CD"
+        if name == "Congo, Republic of the":
+            name = "CG"
+        if name == "Cote d'Ivoire":
+            name = "CI"
+        if name == "South Sudan":
+            name = "SS"
+        if name == "Svalbard":
+            name = "Svalbard and Jan Mayen"
+        if name == "Burma":
+            name = "Myanmar"
+        if name == "Korea, South":
+            name = "South Korea"
+        if name == "Korea, North":
+            name = "North Korea"
+        if name == "Bahamas, The":
+            name = "Bahamas"
+        if name == "Czechia":
+            name = "CZ"
+        if name == "Kosovo":
+            name = "XK"
+        if name == "Eswatini":
+            name = "SZ"
+        if name == "Timor-Leste":
+            name = "TL"
         country_name.append(name)
         
         other = i.findAll("td")[2].text
@@ -226,8 +372,7 @@ def scrape():
     url = 'https://www.cia.gov/library/publications/the-world-factbook/fields/274rank.html'
     browser.visit(url)
 
-    time.sleep(3)
-
+    time.sleep(2)
     html = browser.html
 
     soup = bs(html, "html.parser")
@@ -241,6 +386,32 @@ def scrape():
 
     for i in trow:
         name = i.find("td", class_="region").find("a").text
+        if name == "Congo, Democratic Republic of the":
+            name = "CD"
+        if name == "Congo, Republic of the":
+            name = "CG"
+        if name == "Cote d'Ivoire":
+            name = "CI"
+        if name == "South Sudan":
+            name = "SS"
+        if name == "Svalbard":
+            name = "Svalbard and Jan Mayen"
+        if name == "Burma":
+            name = "Myanmar"
+        if name == "Korea, South":
+            name = "South Korea"
+        if name == "Korea, North":
+            name = "North Korea"
+        if name == "Bahamas, The":
+            name = "Bahamas"
+        if name == "Czechia":
+            name = "CZ"
+        if name == "Kosovo":
+            name = "XK"
+        if name == "Eswatini":
+            name = "SZ"
+        if name == "Timor-Leste":
+            name = "TL"
         country_name.append(name)
         
         emissions = i.findAll("td")[2].text
@@ -261,8 +432,7 @@ def scrape():
     url = 'https://www.cia.gov/library/publications/the-world-factbook/fields/208rank.html'
     browser.visit(url)
 
-    time.sleep(3)
-
+    time.sleep(2)
     html = browser.html
 
     soup = bs(html, "html.parser")
@@ -276,6 +446,32 @@ def scrape():
 
     for i in trow: 
         name = i.find("td", class_="region").find("a").text
+        if name == "Congo, Democratic Republic of the":
+            name = "CD"
+        if name == "Congo, Republic of the":
+            name = "CG"
+        if name == "Cote d'Ivoire":
+            name = "CI"
+        if name == "South Sudan":
+            name = "SS"
+        if name == "Svalbard":
+            name = "Svalbard and Jan Mayen"
+        if name == "Burma":
+            name = "Myanmar"
+        if name == "Korea, South":
+            name = "South Korea"
+        if name == "Korea, North":
+            name = "North Korea"
+        if name == "Bahamas, The":
+            name = "Bahamas"
+        if name == "Czechia":
+            name = "CZ"
+        if name == "Kosovo":
+            name = "XK"
+        if name == "Eswatini":
+            name = "SZ"
+        if name == "Timor-Leste":
+            name = "TL"
         country_name.append(name)
         
         gdp = i.findAll("td")[2].text
@@ -295,8 +491,7 @@ def scrape():
     url = 'https://www.cia.gov/library/publications/the-world-factbook/fields/211rank.html'
     browser.visit(url)
 
-    time.sleep(3)
-
+    time.sleep(2)
     html = browser.html
 
     soup = bs(html, "html.parser")
@@ -310,6 +505,32 @@ def scrape():
 
     for i in trow: 
         name = i.find("td", class_="region").find("a").text
+        if name == "Congo, Democratic Republic of the":
+            name = "CD"
+        if name == "Congo, Republic of the":
+            name = "CG"
+        if name == "Cote d'Ivoire":
+            name = "CI"
+        if name == "South Sudan":
+            name = "SS"
+        if name == "Svalbard":
+            name = "Svalbard and Jan Mayen"
+        if name == "Burma":
+            name = "Myanmar"
+        if name == "Korea, South":
+            name = "South Korea"
+        if name == "Korea, North":
+            name = "North Korea"
+        if name == "Bahamas, The":
+            name = "Bahamas"
+        if name == "Czechia":
+            name = "CZ"
+        if name == "Kosovo":
+            name = "XK"
+        if name == "Eswatini":
+            name = "SZ"
+        if name == "Timor-Leste":
+            name = "TL"
         country_name.append(name)
         
         gdppc = i.findAll("td")[2].text
@@ -330,42 +551,67 @@ def scrape():
     url = 'https://www.cia.gov/library/publications/the-world-factbook/fields/277.html'
     browser.visit(url)
 
-    time.sleep(3)
-
+    time.sleep(2)
     html = browser.html
 
     soup = bs(html, "html.parser")
 
     country_name = []
     country_lat = []
-    country_long = []
+    country_lon = []
 
     tbody = soup.find("tbody")
     trow = tbody.findAll("tr")
 
     for i in trow:
-        lat_long = []
+        lat_lon = []
         
         try:
             coord = i.find("div", {"id": "field-geographic-coordinates"})\
                 .find("div", class_ = "category_data subfield text").text.strip()
-            lat_long = coord.split(",")
+            lat_lon = coord.split(",")
             
-            if lat_long[0][-1] == "S":
-                lat = -float(lat_long[0][:-2].replace(" ", "."))
+            if lat_lon[0][-1] == "S":
+                lat = -float(lat_lon[0][:-2].replace(" ", "."))
             else:
-                lat = float(lat_long[0][:-2].replace(" ", "."))
+                lat = float(lat_lon[0][:-2].replace(" ", "."))
 
-            if lat_long[1][-1] == "W":
-                long = -float(lat_long[1][1:-2].replace(" ", "."))
+            if lat_lon[1][-1] == "W":
+                lon = -float(lat_lon[1][1:-2].replace(" ", "."))
             else:
-                long = float(lat_long[1][1:-2].replace(" ", "."))
+                lon = float(lat_lon[1][1:-2].replace(" ", "."))
             
             name = i.find("td", class_="country").find("a").text
+            if name == "Congo, Democratic Republic of the":
+                name = "CD"
+            if name == "Congo, Republic of the":
+                name = "CG"
+            if name == "Cote d'Ivoire":
+                name = "CI"
+            if name == "South Sudan":
+                name = "SS"
+            if name == "Svalbard":
+                name = "Svalbard and Jan Mayen"
+            if name == "Burma":
+                name = "Myanmar"
+            if name == "Korea, South":
+                name = "South Korea"
+            if name == "Korea, North":
+                name = "North Korea"
+            if name == "Bahamas, The":
+                name = "Bahamas"
+            if name == "Czechia":
+                name = "CZ"
+            if name == "Kosovo":
+                name = "XK"
+            if name == "Eswatini":
+                name = "SZ"
+            if name == "Timor-Leste":
+                name = "TL"
             
             country_name.append(name)
             country_lat.append(lat)
-            country_long.append(long)
+            country_lon.append(lon)
             
         except:
             try:
@@ -375,24 +621,50 @@ def scrape():
                 search = re.search(':(.+?);', coord).group()
                 if search != None:
                     try:
-                        lat_long = search[2:-1].split(",")
+                        lat_lon = search[2:-1].split(",")
 
-                        if lat_long[0][-1] == "S":
-                            lat = -float(lat_long[0][:-2].replace(" ", "."))
+                        if lat_lon[0][-1] == "S":
+                            lat = -float(lat_lon[0][:-2].replace(" ", "."))
                         else:
-                            lat = float(lat_long[0][:-2].replace(" ", "."))
+                            lat = float(lat_lon[0][:-2].replace(" ", "."))
                         
 
-                        if lat_long[1][-1] == "W":
-                            long = -float(lat_long[1][1:-2].replace(" ", "."))
+                        if lat_lon[1][-1] == "W":
+                            lon = -float(lat_lon[1][1:-2].replace(" ", "."))
                         else:
-                            long = float(lat_long[1][1:-2].replace(" ", "."))
+                            lon = float(lat_lon[1][1:-2].replace(" ", "."))
 
                         name = i.find("td", class_="country").find("a").text
-                        
+                        if name == "Congo, Democratic Republic of the":
+                            name = "CD"
+                        if name == "Congo, Republic of the":
+                            name = "CG"
+                        if name == "Cote d'Ivoire":
+                            name = "CI"
+                        if name == "South Sudan":
+                            name = "SS"
+                        if name == "Svalbard":
+                            name = "Svalbard and Jan Mayen"
+                        if name == "Burma":
+                            name = "Myanmar"
+                        if name == "Korea, South":
+                            name = "South Korea"
+                        if name == "Korea, North":
+                            name = "North Korea"
+                        if name == "Bahamas, The":
+                            name = "Bahamas"
+                        if name == "Czechia":
+                            name = "CZ"
+                        if name == "Kosovo":
+                            name = "XK"
+                        if name == "Eswatini":
+                            name = "SZ"
+                        if name == "Timor-Leste":
+                            name = "TL"
+                            
                         country_name.append(name)
                         country_lat.append(lat)
-                        country_long.append(long)
+                        country_lon.append(lon)
                         
                     except:
                         print(f"Whoops! I'm stupid...")
@@ -404,25 +676,56 @@ def scrape():
     coord_df = pd.DataFrame({
         "name": country_name,
         "lat": country_lat,
-        "long": country_long
+        "lon": country_lon
     })
 
+    
+    # Close browser
     browser.quit()
 
+    
     # Merge data
-    merge1_df = population_df.merge(econsumption_df, on="name")
-    merge2_df = merge1_df.merge(fossil_df, on="name")
-    merge3_df = merge2_df.merge(nuclear_df, on="name")
-    merge4_df = merge3_df.merge(hydro_df, on="name")
-    merge5_df = merge4_df.merge(other_df, on="name")
-    merge6_df = merge5_df.merge(emissions_df, on="name")
-    merge7_df = merge6_df.merge(gdp_df, on="name")
-    merge8_df = merge7_df.merge(gdppc_df, on="name")
-    energy_df = merge8_df.merge(coord_df, on="name")
+    merge1_df = population_df.merge(econsumption_df, how="left", on="name")
+    merge2_df = merge1_df.merge(fossil_df, how="left", on="name")
+    merge3_df = merge2_df.merge(nuclear_df, how="left", on="name")
+    merge4_df = merge3_df.merge(hydro_df, how="left", on="name")
+    merge5_df = merge4_df.merge(other_df, how="left", on="name")
+    merge6_df = merge5_df.merge(emissions_df, how="left", on="name")
+    merge7_df = merge6_df.merge(gdp_df, how="left", on="name")
+    merge8_df = merge7_df.merge(gdppc_df, how="left", on="name")
+    energy_df = merge8_df.merge(coord_df, how="left", on="name")
 
+    
+    # Replace null values with "0"
+    energy_df.fillna(0, inplace=True)
+
+    
+    # Add a column for energy consumption per capita
+    econsumptionpc = []
+    for i in range(len(energy_df)):
+        if energy_df.population[i] != 0 and energy_df.econsumption[i] != 0:
+            calculation = energy_df.econsumption[i] / energy_df.population[i]
+            econsumptionpc.append(calculation)
+        elif energy_df.population[i] == 0 or energy_df.econsumption[i] == 0:
+            econsumptionpc.append(0)
+    
+    energy_df["econsumptionpc"] = econsumptionpc
+
+    
+    # Add a column for energy consumption per capita over GDP per capita
+    little_big_spenders = []    
+    for i in range(len(energy_df)):
+        if energy_df.population[i] != 0 and energy_df.gdppc[i] != 0:
+            calculation = (energy_df.econsumption[i] / energy_df.population[i]) / energy_df.gdppc[i]
+            little_big_spenders.append(calculation)
+        elif energy_df.population[i] == 0 or energy_df.gdppc[i] == 0:
+            little_big_spenders.append(0)
+
+    energy_df["little_big_spenders"] = little_big_spenders
+    
+    
     # Convert DataFrame to a dictionary
-    browser.quit()
-
     energy_dict = energy_df.to_dict("list")
 
+    # Return the resulting dictionary
     return energy_dict
